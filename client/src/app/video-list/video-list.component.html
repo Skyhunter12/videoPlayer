@@ -1,0 +1,52 @@
+<p>video-list works!</p>
+<div class="container"> 
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-10 col-lg-offset-1 col-md-offset-1 col-offset-1">
+           <ul> 
+            <li class="card" *ngFor="let video of videos let $index = index">
+              <div class="col-lg-9">
+                <app-video-child [video]="video" (click)="onClickPlaylistItem(video, $index)"></app-video-child>
+              </div>
+              <div class="col-lg-2">
+                <a (click)="deleteVideo(video)"><fa-icon [icon]="faRecycle" style="color:red"></fa-icon></a>
+              </div>
+           </li>
+          </ul>
+          <!-- <div class="col-lg-10 col-lg-offset-1">
+            <app-video-player [video]="video" [videos]="videos" ></app-video-player>
+          </div> -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <vg-player (onPlayerReady)="onPlayerReady($event)">
+                <vg-overlay-play></vg-overlay-play>
+                <vg-buffering></vg-buffering>
+                <vg-scrub-bar >
+
+                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+            
+                <vg-controls>
+                  <vg-play-pause></vg-play-pause>
+                  <vg-playback-button></vg-playback-button>
+            
+                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>            
+                  <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+            
+                  <vg-track-selector></vg-track-selector>
+                  <vg-mute></vg-mute>
+                  <vg-volume></vg-volume>
+                  <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+            
+                <video [vgMedia]="media" #media id="singleVideo" [src]="currentItem.videoUrl" preload="auto" crossorigin>
+                  <!-- <source  type="video/mp4"> -->            
+                </video>
+              </vg-player>
+        </div>
+        
+    </div>
+</div>
